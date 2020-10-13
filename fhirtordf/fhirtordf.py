@@ -74,7 +74,8 @@ def serialize_graph(g: Graph, outfile: str, opts: Namespace) -> None:
     if outfile:
         g.serialize(outfile, format=opts.format)
     else:
-        print(g.serialize(format=opts.format).decode())
+        #print(g.serialize(format=opts.format).decode())
+        return g.serialize(format=opts.format).decode()
 
 
 def file_filter(ifn: str, indir: str, opts: Namespace) -> bool:
@@ -173,7 +174,8 @@ def main(argv: List[str], default_exit: bool = True) -> bool:
     nfiles, nsuccess = dlp.run(proc=proc_file, file_filter_2=file_filter)
     if nfiles:
         if dlp.opts.graph:
-            serialize_graph(dlp.opts.graph, dlp.opts.outfile[0] if dlp.opts.outfile else None, dlp.opts)
+            # serialize_graph(dlp.opts.graph, dlp.opts.outfile[0] if dlp.opts.outfile else None, dlp.opts)
+            return serialize_graph(dlp.opts.graph, dlp.opts.outfile[0] if dlp.opts.outfile else None, dlp.opts)
         return nsuccess > 0
     return False
 
